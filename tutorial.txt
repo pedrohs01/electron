@@ -1,0 +1,59 @@
+[14:07] KAIO EDUARDO DE CARVALHO SANTOS
+Tutorial ELECTRON
+ 
+1) iniciar um novo projeto node 
+
+npm init
+ 
+(Seguir a  documentaçao)
+ 
+2) criar uma estrutura de pastas (modelo de camadas MVC)
+ 
+src
+ 
+---- views 
+
+---- public
+ 
+ 
+
+
+3)personalizaçao da janela 
+
+    -dimensoes 
+
+    -redimensionamento
+
+    -cor da janela
+
+    -icone
+
+    -menu e barra de titulo
+ 
+    4) personalizaçao do menu 
+
+    -template -> estrutura de dados 
+
+    Passo 1: criar o template
+
+    Passo 2: exibir o templateno lugar do menu original
+ 
+      OBS: alguns recursos prescisam ser importados 
+
+      Exemplo alguns acesso a links internos
+
+      shell
+ 
+      OBS2: o shell  é usado no main para acessar recursos para externos (LINKS)
+ 
+ 
+  5) Processo 
+
+  [14:32] PEDRO HENRIQUE DOS SANTOS
+preload. js (seguir a documentação para implementar)
+
+O preload.js é usado para:
+
+1) Expor a utilização do node e recursos do electron
+
+para o processo de renderização, melhorando o desempenho e a segurança
