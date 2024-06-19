@@ -1,8 +1,6 @@
-[14:07] KAIO EDUARDO DE CARVALHO SANTOS
 Tutorial ELECTRON
  
 1) iniciar um novo projeto node 
-
 npm init
  
 (Seguir a  documentaçao)
@@ -12,48 +10,57 @@ npm init
 src
  
 ---- views 
-
 ---- public
  
  
 
-
 3)personalizaçao da janela 
-
     -dimensoes 
-
     -redimensionamento
-
     -cor da janela
-
     -icone
-
     -menu e barra de titulo
  
     4) personalizaçao do menu 
-
     -template -> estrutura de dados 
-
     Passo 1: criar o template
-
     Passo 2: exibir o templateno lugar do menu original
  
       OBS: alguns recursos prescisam ser importados 
-
       Exemplo alguns acesso a links internos
-
       shell
  
       OBS2: o shell  é usado no main para acessar recursos para externos (LINKS)
  
  
-  5) Processo 
-
-  [14:32] PEDRO HENRIQUE DOS SANTOS
-preload. js (seguir a documentação para implementar)
-
-O preload.js é usado para:
-
-1) Expor a utilização do node e recursos do electron
-
-para o processo de renderização, melhorando o desempenho e a segurança
+  5) Processo (principal e renderizaçao)
+  - Só pode existir um processo principal ( main.js)
+  - Para criar um processo de renderizaçao devemos ligar 
+    um documento js  na pagina inicial 
+  - Podemos usar um unico processo  de renderizaçao para todas as paginas html, porem é recomendo usar um processo de renderizaçao
+    por um documento html
+  - por  um questao didatica podemos dizer que o processo de renderizaçao é o front- end da aplicaçao  e´ o processo principal ´e o back end da aplicaçao
+ 
+ 
+  preload.js (seguir a documentaçao para implementar)
+  o preload.js é usado para expor
+ 
+  1) expor a utilizaçao do node e recurso do electron para o render para o processo de renderizaçao melhorando o desemprenho e segurança
+  2) Para situaçoes onde voce sabe que vai precisar de certos recursos e dados antes que o usuario solicite diretamente , tornando o usuario mais rapida e suave
+   OBS é posssivel tirar o contexto de isolamento  e permitir isolamento e permitir a execuçao do node.js no processo de renderizaçao
+ 
+ 
+   Sintaxe do IPc main e  IPCrenderer (recebimento)
+   on()
+   ipcMain.on(()=>{})
+ 
+   IPCrenderer.on(()=>{})
+ 
+                            preload.js
+                                |
+   Fluxo : o IPCrenderer -> hello() ->  -> main.js(ipcMain)
+ 
+   ------------------------------------------------------------------
+ 
+ 
+   uso do frame

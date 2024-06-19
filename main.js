@@ -21,21 +21,27 @@ const createWindow = () => {       // Janela Principal
     win.loadFile('./src/views/index.html')
 }
 // janela sobre
+let about // bug de abertura
+
 const aboutWindow = () => {       // Janela Principal
     // nativeTheme.themeSource ='dark'
-    const about = new BrowserWindow({
-        width: 360, // largura
-        height: 220,// altura
-        icon: './src/public/img/piggy.png',
-        resizable: false, // evitar o redimensionamento
-        titleBarStyle: 'hidden',  //esconder barra de titulo e menu
-        // autoHideMenuBar: true // esconder menu
-    })
- 
+    // se a janela about noa etiver aberta
+    if (!about) {
+        about = new BrowserWindow({
+            width: 360, // largura
+            height: 220,// altura
+            icon: './src/public/img/piggy.png',
+            resizable: false, // evitar o redimensionamento
+           // titleBarStyle: 'hidden',  esconder barra de titulo e menu
+            // autoHideMenuBar: true // esconder menu
+        })
+    }
     //iniciar a janela com o menu personalizado
- 
- 
     about.loadFile('./src/views/sobre.html')
+    // bug2 
+    about.on('closed', () => {
+        about = null
+    })
 }
  
 app.whenReady().then(() => {  // executa de forma assincrona a aplicaçao

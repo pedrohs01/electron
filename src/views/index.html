@@ -7,17 +7,24 @@
  
     <!-- evitar ataques de Cross Site Scripting (injeção de dados)-->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">
- 
+    
     <!-- O electron usa o titulo na janela -->
     <title>Tutorial Electron</title>
+    <!-- bootrep-->
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
 </head>
- 
 <body>
-    <p id="dataAtual"></p>
+    <div class="container">
+        <p id="dataAtual"></p>
     <h1>Hello Electron</h1>
-    <button onclick="sobre()">Sobre</button>
+    <button class="btn" onclick="sobre()">Sobre</button>
  
-    <!-- Processo de renderizaçao -->
+    <!-- bootstrap-->
+    <script src="../public/js/bootstrap.min.js"></script> 
+    
+    <!-- Processo de renderizaçao (sempre no fim)-->
+    </div>
+    
     <script src="./renderer.js"></script>
 </body>
  
