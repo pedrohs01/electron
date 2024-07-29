@@ -1,8 +1,8 @@
 const { app, BrowserWindow, nativeTheme, Menu, shell, ipcMain } = require('electron')  // Importaçao
- 
+
 //  relacionado ao preload.js (path é o caminho)
 const path = require('node:path')
- 
+
 const createWindow = () => {       // Janela Principal
     // nativeTheme.themeSource ='dark'
     const win = new BrowserWindow({
@@ -17,7 +17,7 @@ const createWindow = () => {       // Janela Principal
         }
     })
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
- 
+
     win.loadFile('./src/views/index.html')
 }
 // janela sobre
@@ -32,7 +32,7 @@ const aboutWindow = () => {       // Janela Principal
             height: 220,// altura
             icon: './src/public/img/piggy.png',
             resizable: false, // evitar o redimensionamento
-           // titleBarStyle: 'hidden',  esconder barra de titulo e menu
+            // titleBarStyle: 'hidden',  esconder barra de titulo e menu
             // autoHideMenuBar: true // esconder menu
         })
     }
@@ -43,13 +43,13 @@ const aboutWindow = () => {       // Janela Principal
         about = null
     })
 }
- 
+
 app.whenReady().then(() => {  // executa de forma assincrona a aplicaçao
     createWindow()
 })
- 
+
 //  Template do menu personalizado
- 
+
 const template = [
     {
         label: 'Arquivo',
@@ -72,7 +72,7 @@ const template = [
                 role: 'toggleDevTools'
             }, {
                 type: 'separator'
- 
+
             }, {
                 label: 'aplicar zoom',
                 role: 'zoomIn'
@@ -95,7 +95,7 @@ const template = [
             {
                 type: 'separator'
             },
- 
+
             {
                 label: 'Sobre',
                 accelerator: 'Alt+F1',
@@ -103,26 +103,26 @@ const template = [
             },
         ]
     }
- 
+
 ]
- 
- 
+
+
 // Processos
 console.log("Processo Principal")
- 
+
 // exemplo de comando que so funciona no Node.js
 console.log(`Electron:${process.versions.electron}`)
- 
+
 // Exemplo 2: recebimento de uma mensagem do renderer
- 
-ipcMain.on('send-message',(event,message) => {
- 
-console.log(`processo principal recebeu uma mensagem:${message}`)
+
+ipcMain.on('send-message', (event, message) => {
+
+    console.log(`processo principal recebeu uma mensagem:${message}`)
 })
- 
- 
+
+
 // Exemplo 3 recebimento de uma açao a ser executada
- 
-ipcMain.on("open-about",()=>{
-aboutWindow()
+
+ipcMain.on("open-about", () => {
+    aboutWindow()
 })
