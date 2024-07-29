@@ -4,7 +4,8 @@ const { contextBridge, ipcRenderer } = require('electron')
  
 contextBridge.exposeInMainWorld('api', {
     verElectron: () => process.versions.electron,
-    hello: () => ipcRenderer.send("send-message", "OIIIIII!!!!"),
+    hello: (message) => ipcRenderer.send("send-message", message),
+    answer: (message) => ipcRenderer.on('receive-message', message),
     openAbout: () => ipcRenderer.send('open-about')
 })
  

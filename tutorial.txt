@@ -1,66 +1,158 @@
-Tutorial ELECTRON
+[15:57] JOAO VITOR ANDRADE DE MIRANDA
+Tutorial Electron
  
-1) iniciar um novo projeto node 
-npm init
- 
-(Seguir a  documentaçao)
- 
-2) criar uma estrutura de pastas (modelo de camadas MVC)
- 
-src
- 
----- views 
----- public
- 
- 
+1) Iniciar um novo projeto Node
 
-3)personalizaçao da janela 
-    -dimensoes 
-    -redimensionamento
-    -cor da janela
-    -icone
-    -menu e barra de titulo
+    npm init
  
-    4) personalizaçao do menu 
-    -template -> estrutura de dados 
-    Passo 1: criar o template
-    Passo 2: exibir o templateno lugar do menu original
+(seguir a documentação)
  
-      OBS: alguns recursos prescisam ser importados 
-      Exemplo alguns acesso a links internos
-      shell
+2) Criar uma estrutura de pastas (modelo de camadas MVC)
+
+src
+
+|---- views 
+
+        |--- index.html
+
+|---- public
+
+        |--- css
+
+        |--- img
+
+        |--- js
  
-      OBS2: o shell  é usado no main para acessar recursos para externos (LINKS)
+3) Personalização da janela 
+
+    - dimensões
+
+    - redimensionamento
+
+    - cor
+
+    - ícone
+
+    - menu e barra de título
+ 
+4) Personalização do menu
+
+template -> estrutura de dados
+
+1º Passo: Importar o recurso Menu e criar o template
+
+2º Passo: Exibir o template no lugar do menu original
+ 
+Obs: Alguns recursos precisam ser importação:
+
+    ex: Acesso a links externos
+
+    shell
+
+Obs2: O shell é usado no main para acessar recursos externos (links)
+ 
+5) Processos (principal e renderização)
+
+    - Só pode existir um processo principal (main.js)
+
+    - Para criar um processo de renderização deve-se ligar um
+
+    documento js na página html
+
+    - Pode-se usar um único processo de renderização para todas
+
+    as páginas html, porém é recomendado usar um processo de
+
+    renderização por documento html
+
+    - Por uma questão didática pode-se dizer que o processo de 
+
+    renderização é o front-end da aplicação e o processo principal
+
+    é o back-end da aplicação
+ 
+preload.js (Seguir a documentação para implementar)
+
+    É usado para:
+
+1) Expor a utilização do node e recursos do electron
+
+para o processo de renderização, melhorando o desempenho
+
+e a segurança
+
+2) Para situações onde sabe que irá precisar de certos recursos e dados
+
+antes que o usuário solicite diretamente, tornando a experiência do usuário
+
+mais rápida e suave
+ 
+Obs: É possível tirar o contexto de isolamento e permitir a execução do node.js
+
+no processo de renderização
+ 
+IPC(inter-process communication)
+
+ipcMain (processo principal)
+
+ipcRenderer (processo de renderização)
+ 
+Sintaxe do ipcMain e ipcRenderer (recebimento)
+
+on()
+
+ipcMain.on(()=>{})
+
+ipcRenderer.on(()=>{})
+ 
+                      preload.js
+
+Fluxo: ipcRenderer -> hello() -> main.js (ipcMain)
+ 
+_________________________________________
+
+Uso de frameworks (front-end) no electron
+
+    - bootstrap
+
+        |_____ local (download)
+
+1º Passo: Fazer o download do css e js compilado
+
+2º Passo: Descompactar e copiar o bootstrap.min.css e bootstrap.min.js para a pasta public
+
+3° Passo: Link com o documento HTML
+
+4º Passo: Seguir a documentação do bootstrap:
+
+    Dica: O bootstrap trabalha com classes
+
+5º Passo: Inicie criando um container (div.container)
+ 
+_________________________________________
+
+Relação entre janelas (parent-child) e modal
+
+    - Foco do usuário no sistema
+
+    - Segurança e desempenho
+ 
+1º Passo: Determinar a janela pai (principal)
+
+2º Passo: Criar o relacionamento entre janelas
+
+_________________________________________
+ 
+ IPC - Comunicação segura entre Processos
+
+ ipcMain (main.js)
+          || <----------------------- preload.js
+ ipcRenderer (renderer.js)
+
+ obs:
+ 1) main.js (processo principal e unico)
+ 2) render.js (processo de renderização)
+     -pode existir vários Processos de renderização
+     - renderer.js (nomne atribuido - você pode escolher qualquer um)
  
  
-  5) Processo (principal e renderizaçao)
-  - Só pode existir um processo principal ( main.js)
-  - Para criar um processo de renderizaçao devemos ligar 
-    um documento js  na pagina inicial 
-  - Podemos usar um unico processo  de renderizaçao para todas as paginas html, porem é recomendo usar um processo de renderizaçao
-    por um documento html
-  - por  um questao didatica podemos dizer que o processo de renderizaçao é o front- end da aplicaçao  e´ o processo principal ´e o back end da aplicaçao
- 
- 
-  preload.js (seguir a documentaçao para implementar)
-  o preload.js é usado para expor
- 
-  1) expor a utilizaçao do node e recurso do electron para o render para o processo de renderizaçao melhorando o desemprenho e segurança
-  2) Para situaçoes onde voce sabe que vai precisar de certos recursos e dados antes que o usuario solicite diretamente , tornando o usuario mais rapida e suave
-   OBS é posssivel tirar o contexto de isolamento  e permitir isolamento e permitir a execuçao do node.js no processo de renderizaçao
- 
- 
-   Sintaxe do IPc main e  IPCrenderer (recebimento)
-   on()
-   ipcMain.on(()=>{})
- 
-   IPCrenderer.on(()=>{})
- 
-                            preload.js
-                                |
-   Fluxo : o IPCrenderer -> hello() ->  -> main.js(ipcMain)
- 
-   ------------------------------------------------------------------
- 
- 
-   uso do frame
