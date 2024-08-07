@@ -22,3 +22,16 @@ api.answer((event, message) => {
 function sobre(){
    api.openAbout()
 }
+
+//dialogs (caixa de menssaem)
+function info(){
+   api.info()
+}
+
+function light(){
+   api.light()
+}
+
+function danger(){
+   api.danger()
+}

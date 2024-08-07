@@ -1,4 +1,4 @@
-const { app, BrowserWindow, nativeTheme, Menu, shell, ipcMain } = require('electron')  // Importaçao
+const { app, BrowserWindow, nativeTheme, Menu, shell, ipcMain, dialog } = require('electron')  // Importaçao
 
 //  relacionado ao preload.js (path é o caminho)
 const path = require('node:path')
@@ -126,4 +126,42 @@ ipcMain.on('send-message', (event, message) => {
 
 ipcMain.on("open-about", () => {
     aboutWindow()
+})
+
+//dialogs .........................................
+
+// caixa simples de mensagem
+ipcMain.on('dialog-info', () =>{
+    dialog.showMessageBox({
+        type: 'info',
+        title: "titulo da menssagem",
+        message: "menssagem",
+        buttons : ['ok']
+    })
+})
+
+// caixa de confirmaçao
+ipcMain.on('dialog-light', () =>{
+    dialog.showMessageBox({
+        type: 'warning',
+        title: "atençao",
+        message: "confrima",
+        buttons : ['sim','não'],
+        defaultId: 0
+    }).then((result) => {
+        console.log(result)
+        if(result.response === 0) {
+            console.log("registro exculido com")
+        }
+    })
+})
+
+//explorador de arquivos
+
+ipcMain.on('dialog-danger', () => {
+    dialog.showOpenDialog({
+        properties: ['createDirectory']
+    }).then((result) => {
+        console.log(result)
+    })
 })
